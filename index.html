@@ -2,16 +2,180 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>DOOM (Shareware)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DOOM (Shareware) | zonzunzhe</title>
+  <meta name="description" content="Play the DOOM shareware episode in your browser, hosted by zonzunzhe.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="https://v8.js-dos.com/latest/js-dos.css">
   <script src="https://v8.js-dos.com/latest/js-dos.js"></script>
+
   <style>
-    body { margin: 0; background: #111; }
-    #dos { width: 100vw; height: 100vh; }
+    :root {
+      --void: #0a0707;
+      --rust: #2a120d;
+      --blood: #7a1010;
+      --brass: #b8964a;
+      --brass-dim: #6e5a2c;
+      --parchment: #d9ceb2;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 16px 24px;
+      color: var(--parchment);
+      font-family: "IM Fell English", Georgia, "Times New Roman", serif;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(122, 16, 16, 0.35), transparent 60%),
+        linear-gradient(180deg, var(--rust) 0%, var(--void) 55%);
+      background-color: var(--void);
+    }
+
+    header {
+      text-align: center;
+      max-width: 40rem;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-family: Cinzel, "Trajan Pro", Georgia, serif;
+      font-weight: 700;
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      letter-spacing: 0.08em;
+      color: var(--brass);
+      text-shadow: 0 0 18px rgba(184, 150, 74, 0.25), 0 2px 0 #000;
+    }
+
+    header p {
+      margin: 0;
+      font-style: italic;
+      color: var(--parchment);
+    }
+
+    /* The cogitator screen: the one memorable element */
+    .screen {
+      --size: min(960px, 100%, calc((100vh - 280px) * 4 / 3));
+      position: relative;
+      width: var(--size);
+      aspect-ratio: 4 / 3;
+      min-height: 240px;
+      padding: 10px;
+      background: #000;
+      border: 3px solid var(--brass);
+      outline: 1px solid var(--brass-dim);
+      outline-offset: 5px;
+      box-shadow:
+        inset 0 0 0 2px #000,
+        inset 0 0 0 4px var(--blood),
+        0 0 40px rgba(122, 16, 16, 0.45),
+        0 18px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .screen::before,
+    .screen::after {
+      content: "";
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border: 3px solid var(--brass);
+      pointer-events: none;
+    }
+    .screen::before { top: -12px; left: -12px; border-right: 0; border-bottom: 0; }
+    .screen::after  { bottom: -12px; right: -12px; border-left: 0; border-top: 0; }
+
+    #dos {
+      width: 100%;
+      height: 100%;
+      background: #000;
+    }
+
+    .controls {
+      width: var(--size, 100%);
+      max-width: 960px;
+      margin: 26px 0 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 22px;
+      font-size: 0.98rem;
+    }
+
+    .controls li b {
+      font-family: Cinzel, Georgia, serif;
+      font-weight: 500;
+      color: var(--brass);
+      letter-spacing: 0.04em;
+    }
+
+    footer {
+      margin-top: auto;
+      padding-top: 28px;
+      text-align: center;
+      max-width: 44rem;
+      font-size: 0.92rem;
+      color: #a99f86;
+    }
+
+    footer a {
+      color: var(--brass);
+      text-underline-offset: 3px;
+    }
+
+    footer a:hover { color: #e0c07a; }
+
+    a:focus-visible {
+      outline: 2px solid var(--parchment);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 600px) {
+      body { padding-top: 20px; }
+      .screen { --size: 100%; }
+      .controls { flex-direction: column; align-items: center; gap: 4px; }
+    }
   </style>
 </head>
+
 <body>
-  <div id="dos"></div>
+  <header>
+    <h1>DOOM</h1>
+    <p>The shareware episode, running in your browser. Click the screen, then fight.</p>
+  </header>
+
+  <main class="screen" aria-label="DOOM game screen">
+    <div id="dos"></div>
+  </main>
+
+  <ul class="controls">
+    <li><b>Arrow keys</b> move</li>
+    <li><b>Ctrl</b> fire</li>
+    <li><b>Space</b> open doors</li>
+    <li><b>Shift</b> run</li>
+  </ul>
+
+  <footer>
+    <p>
+      DOOM shareware by id Software. Runs on <a href="https://js-dos.com">js-dos</a>
+      and is hosted on GitHub Pages.
+      Back to the <a href="https://github.com/zonzunzhe">zonzunzhe profile</a>.
+    </p>
+  </footer>
+
   <script>
     Dos(document.getElementById("dos"), { url: "doom.jsdos" });
   </script>
